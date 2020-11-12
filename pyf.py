@@ -72,67 +72,38 @@ while True:
         cifras = 3
         intentos = 10
         s = generar_secreto(cifras)
-        while True:
-            n = [int(x) for x in input("Ingrese un numero: ")]
-            if validar_longitud(n,cifras) == True:
-                break           
-            try:
-                e = validar_longitud(n,cifras)
-                if e == False:
-                    quit()
-            except:
-                print("Ingrese un numero valido")
-                continue
-
-        final = comprobar(intentos, s, n)
-        nombre = input("Ingrese su nombre: ")
-        final.append(nombre)
-        print(final)
 
     elif opcion == "b":
         print("Opción de 4 cifras")
         cifras = 4
+        intentos = 15
         s = generar_secreto(cifras)
-        while True:
-            n = [int(x) for x in input("Ingrese un numero: ")]
-            if validar_longitud(n,cifras) == True:
-                break           
-            try:
-                e = validar_longitud(n,cifras)
-                if e == False:
-                    quit()
-            except:
-                print("Ingrese un numero valido")
-                continue
-
-        final = comprobar(intentos, s, n)
-        nombre = input("Ingrese su nombre: ")
-        final.append(nombre)
-        print(final)
 
     elif opcion == "c":
         print("Opción de 5 cifras")
         cifras = 5
         intentos = 20
         s = generar_secreto(cifras)
-        while True:
-            n = [int(x) for x in input("Ingrese un numero: ")]
-            if validar_longitud(n,cifras) == True:
-                break           
-            try:
-                e = validar_longitud(n,cifras)
-                if e == False:
-                    quit()
-            except:
-                print("Ingrese un numero valido")
-                continue
-
-        final = comprobar(intentos, s, n)
-        nombre = input("Ingrese su nombre: ")
-        final.append(nombre)
-        print(final)
+        
     else:
         print("Fin del juego")
         break
+
+    while True:
+        n = [int(x) for x in input("Ingrese un numero: ")]
+        if validar_longitud(n,cifras) == True:
+            break           
+        try:
+            e = validar_longitud(n,cifras)
+            if e == False:
+                quit()
+        except:
+            print("Ingrese un numero valido")
+            continue
+
+    final = comprobar(intentos, s, n)
+    nombre = input("Ingrese su nombre: ")
+    final.append(nombre)
+    print(final)
 
     #Revisar archivo para el ganador de cada categoria
