@@ -25,6 +25,28 @@ def validar_longitud(numero,longitud): #Se revisa la longitud del numero
     else:
         return False
 
+
+def puntaje(a):
+    f = open("archivo.txt","r")
+    menor=1000
+    puntajes = []
+    for i in f:
+        i = i.rstrip()
+        if not i.startswith(a):
+            continue
+        score = i.split(",")
+        puntajes.append(score)
+        puntaje = int(score[1])
+        if(menor > puntaje):
+            menor = puntaje
+    for j in puntajes:
+        menor=str(menor)
+        if (j[1]==menor):
+            print ("El mejor en ",a," digitos es:",j[3]," con ",j[1]," intentos")
+    
+    
+
+
 def comprobar(intentos,numero,entrada): #Comienza el juego de picas y fijas
     resultado = ""
     for i in range(intentos):
@@ -33,7 +55,7 @@ def comprobar(intentos,numero,entrada): #Comienza el juego de picas y fijas
             if intentos == 1:
                 resultado = "perdiste "
                 print(resultado)
-                intent = intentos+10
+                intent = 0
                 return [len(numero),intent, resultado]
             else:
                 for i in range(len(entrada)):
@@ -66,7 +88,7 @@ intentos = 0
 
 while True:
     opcion = input("Este es un juego de picas y fijas, con cuantas cifras desea jugar:\n" #Menu de opciones
-    "a.3 cifras(10 intentos)\nb.4 cifras(15 intentos)\nc.5 cifras(20 intentos)\n")
+    "a.3 cifras(10 intentos)\nb.4 cifras(15 intentos)\nc.5 cifras(20 intentos)\nd. ver puntajes")
     if opcion == "a":
         print("Opción de 3 cifras")
         cifras = 3
@@ -85,6 +107,10 @@ while True:
         intentos = 20
         s = generar_secreto(cifras)
         
+    elif opcion == "d":
+        a = input("¿Que puntaje  quiere ver?\n3. para tres cifras\n4. para cuatro cifras\n5. para cinco cifras")
+        puntaje(a)
+        break
     else:
         print("Fin del juego")
         break
@@ -113,8 +139,9 @@ while True:
     final = comprobar(intentos, s, n)
     nombre = input("Ingrese su nombre: ")
     final.append(nombre)
-    f.write(str(final[0])+" , "+str(final[1])+" , "+str(final[2])+" , "+str(final[3]+"\n"))
-    f.close()
+    if (final[2]=="ganaste"):
+        f.write(str(final[0])+","+str(final[1])+","+str(final[2])+","+str(final[3]+"\n"))
+        f.close()
     print(final)
 
-    #Revisar archivo para el ganador de cada categoria
+    #Revisar archivo para el ganador de cada acategoria

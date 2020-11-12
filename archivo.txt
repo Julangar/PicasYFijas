@@ -1,0 +1,6 @@
+3,6,ganaste,julio
+3,8,ganaste,julian
+3,2,ganaste,daza
+4,1,ganaste,jorge
+4,6,ganaste,catalina
+5,15,ganaste,milo
