@@ -101,9 +101,20 @@ while True:
             print("Ingrese un numero valido")
             continue
 
+
+    try:
+        f = open("archivo.txt", "r")
+        f.close()
+    except:
+        f = open("archivo.txt", "w")
+        f.close()
+    
+    f = open("archivo.txt", "a")
     final = comprobar(intentos, s, n)
     nombre = input("Ingrese su nombre: ")
     final.append(nombre)
+    f.write(str(final[0])+" , "+str(final[1])+" , "+str(final[2])+" , "+str(final[3]+"\n"))
+    f.close()
     print(final)
 
     #Revisar archivo para el ganador de cada categoria
