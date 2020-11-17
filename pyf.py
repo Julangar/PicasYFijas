@@ -1,6 +1,6 @@
-from random import randint
+from random import randint #falta de interlineado pa bajo
 
-def generar_secreto(cantidad): #Se genera un numero aleatorio sin repeticion
+def __generar_secreto__(cantidad): #Se genera un numero aleatorio sin repeticion
     secreto = []
     while True:
         d = randint(0, 9)
@@ -10,23 +10,23 @@ def generar_secreto(cantidad): #Se genera un numero aleatorio sin repeticion
             break
     return secreto
 
-def validar_numero(numero): # Se valida que cada digito del numero sea diferente
+def __validar_numero__(numero): # Se valida que cada digito del numero sea diferente
     if len(numero) == 1:
         return True
     else:
         if numero[0] in numero[1:]:
             return False
         else: 
-            return validar_numero(numero[1:])
+            return __validar_numero__(numero[1:])
 
-def validar_longitud(numero,longitud): #Se revisa la longitud del numero
+def __validar_longitud__(numero,longitud): #Se revisa la longitud del numero
     if len(numero) == longitud:
-        return validar_numero(numero)
+        return __validar_numero__(numero)
     else:
         return False
 
 
-def puntaje(a):
+def __puntaje__(a):
     f = open("archivo.txt","r")
     menor=1000
     puntajes = []
@@ -47,7 +47,9 @@ def puntaje(a):
     
 
 
-def comprobar(intentos,numero,entrada): #Comienza el juego de picas y fijas
+def __comprobar__(
+    intentos,numero,
+    entrada): #Comienza el juego de picas y fijas
     resultado = ""
     for i in range(intentos):
             fijas = 0
@@ -69,13 +71,14 @@ def comprobar(intentos,numero,entrada): #Comienza el juego de picas y fijas
                     intent = 11 - intentos
                     return [len(numero),intent, resultado]
                 intentos= intentos-1
-                print("tienes ", fijas, "fijas y tienes ", picas, "picas\n intentos restantes: ",intentos)
+                print("tienes ", fijas, "fijas y tienes ", picas, "picas\n intentos restantes: "
+                ,intentos)
                 while True:
                     entrada = [int(x) for x in input("Ingrese un numero: ")]
-                    if validar_longitud(entrada,len(numero)) == True:
+                    if __validar_longitud__(entrada,len(numero)) == True:
                         break           
                     try:
-                        e = validar_longitud(entrada,len(numero))
+                        e = __validar_longitud__(entrada,len(numero))
                         if e == False:
                             quit()
                     except:
@@ -88,28 +91,30 @@ intentos = 0
 
 while True:
     opcion = input("Este es un juego de picas y fijas, con cuantas cifras desea jugar:\n" #Menu de opciones
-    "a.3 cifras(10 intentos)\nb.4 cifras(15 intentos)\nc.5 cifras(20 intentos)\nd. ver puntajes")
+    "a.3 cifras(10 intentos)\nb.4 cifras(15 intentos)\nc.5 cifras(20 intentos)\nd. ver" 
+    "puntajes")
     if opcion == "a":
         print("Opción de 3 cifras")
         cifras = 3
         intentos = 10
-        s = generar_secreto(cifras)
+        s = __generar_secreto__(cifras)
 
     elif opcion == "b":
         print("Opción de 4 cifras")
         cifras = 4
         intentos = 15
-        s = generar_secreto(cifras)
+        s = __generar_secreto__(cifras)
 
     elif opcion == "c":
         print("Opción de 5 cifras")
         cifras = 5
         intentos = 20
-        s = generar_secreto(cifras)
+        s = __generar_secreto__(cifras)
         
     elif opcion == "d":
-        a = input("¿Que puntaje  quiere ver?\n3. para tres cifras\n4. para cuatro cifras\n5. para cinco cifras")
-        puntaje(a)
+        a = input("¿Que puntaje quiere ver?\n3. para tres cifras\n4. para cuatro cifras"
+        "\n5. para cinco cifras")
+        __puntaje__(a)
         break
     else:
         print("Fin del juego")
@@ -117,10 +122,10 @@ while True:
 
     while True:
         n = [int(x) for x in input("Ingrese un numero: ")]
-        if validar_longitud(n,cifras) == True:
+        if __validar_longitud__(n,cifras) == True:
             break           
         try:
-            e = validar_longitud(n,cifras)
+            e = __validar_longitud__(n,cifras)
             if e == False:
                 quit()
         except:
@@ -136,7 +141,7 @@ while True:
         f.close()
     
     f = open("archivo.txt", "a")
-    final = comprobar(intentos, s, n)
+    final = __comprobar__(intentos, s, n)
     nombre = input("Ingrese su nombre: ")
     final.append(nombre)
     if (final[2]=="ganaste"):
